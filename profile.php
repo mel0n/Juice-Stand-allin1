@@ -1,10 +1,10 @@
 <?php
-require 'includes/juice-stand.php';
+require 'includes/routing.php';
 require 'includes/header.php';
 
 $user_id = isset( $_REQUEST['user_id'] ) ? $_REQUEST['user_id'] : $_SESSION['user_id'];
 
-$profile = juice_profile( $user_id );
+$profile = juice_stand()->profile( $user_id );
 
 ?>
 <div id="profile">

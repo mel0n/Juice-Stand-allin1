@@ -6,13 +6,13 @@
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<?php
-		if ( 'index.php' == juice_get_script() )
+		if ( 'index.php' == $juice_stand->get_script() )
 		{
 			?>
 			<script src="js/index.js"></script>
 			<?php
 		}// end if
-		elseif ( 'game.php' == juice_get_script() )
+		elseif ( 'game.php' == $juice_stand->get_script() )
 		{
 			?>
 			<link rel="stylesheet" type="text/css" href="css/colorbox.css"/>
@@ -21,7 +21,7 @@
 			<script src="js/game.js"></script>
 			<script src="js/customer.js"></script>
 			<script>
-				offline_mode = <?php echo $GLOBALS['offline_mode'] ? 'true' : 'false'; ?>;
+				offline_mode = <?php echo $juice_stand->offline_mode ? 'true' : 'false'; ?>;
 			</script>
 			<?php
 		}// end elseif

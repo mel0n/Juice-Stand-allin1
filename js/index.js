@@ -14,8 +14,7 @@ $( function() {
 	$( document ).on( "submit", "#sign-in-form", function( e ) {
 		var error = false;
 
-		if ( null == $('#sign-in-email').val().match( email_regexp ) )
-		{
+		if ( null == $('#sign-in-email').val().match( email_regexp ) ) {
 			error = 'Please provide a valid email';
 		}
 		else if ( '' == $('#sign-in-password').val() ) {
@@ -31,8 +30,7 @@ $( function() {
 	$( document ).on( "submit", "#sign-up-form", function( e ) {
 		var error = false;
 
-		if ( null == $('#sign-up-email').val().match( email_regexp ) )
-		{
+		if ( null == $('#sign-up-email').val().match( email_regexp ) ) {
 			error = 'Please provide a valid email';
 		}
 		else if ( $('#sign-up-password').val() != $('#sign-up-password_confirm').val() ) {
