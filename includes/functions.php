@@ -103,24 +103,25 @@ function juice_sign_up( $email, $password, $password_confirm )
 	}// end if
 
 	// first check if the user already exists
-	$sql = 'SELECT 1 FROM user WHERE email = ?';
+	$sql = 'SELECT * FROM user WHERE email = ?';
 	$stmt = $db->prepare( $sql );
 	$stmt->bind_param( 's', $email );
-
 	$stmt->execute();
-	$stmt->bind_result( $ok );
-	if ( $stmt->fetch() )
+	$res = $stmt->get_result();
+	if ( $row = $res->fetch_assoc() )
 	{
 		return 'Duplicate account detected.';
 	}//end if
 
 	// not a duplicate...
-	// @TOOD: homework #6 - add new fields
-	$sql = 'INSERT INTO user ( email, password ) VALUES ( ?, ? )';
+	$sql = 'INSERT INTO user ( email, password, name, url, twitter ) VALUES ( ?, ?, ?, ?, ? )';
 	$stmt = $db->prepare( $sql );
 	$stmt->bind_param( 'ss',
 		$_POST['email'],
-		password_hash( $password, PASSWORD_DEFAULT )
+		password_hash( $password, PASSWORD_DEFAULT ),
+		$_POST['name'],
+		$_POST['twitter'],
+		$_POST['url']
 	);
 	$stmt->execute();
 
@@ -141,13 +142,12 @@ function juice_authenticate( $email, $password )
 		return 'Both fields are required.';
 	}
 
-	$sql = 'SELECT id, password FROM user WHERE email = ?';
+	$sql = 'SELECT * FROM user WHERE email = ?';
 	$stmt = $db->prepare( $sql );
 	$stmt->bind_param( 's', $email );
-
 	$stmt->execute();
-	$stmt->bind_result( $id, $password_hash );
-	if ( ! $stmt->fetch() )
+	$res = $stmt->get_result();
+	if ( ! $row = $res->fetch_assoc() )
 	{
 		return 'Email not found.';
 	}//end if
@@ -168,4 +168,27 @@ function juice_logout()
 	session_destroy();
 }//end juice_logout
 
-// @TOOD: homework #6 - add juice_profile function
+function juice_profile( $user_id )
+{
+	if ( ! $user_id )
+	{
+		return FALSE;
+	}// end if
+
+	global $db;
+	$sql = 'SELECT * FROM user WHERE id = ?';
+
+	$stmt = $db->prepare( $sql );
+
+	$stmt->bind_param( 'i', $user_id );
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ( ! $row = $res->fetch_assoc() )
+	{
+		return FALSE;
+	}//end if
+
+	$row['image'] = 'http://www.gravatar.com/avatar/' . md5( $row['email'] );
+
+	return $row;
+}// end juice_profile

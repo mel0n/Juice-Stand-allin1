@@ -1,1 +1,6 @@
-# homework #6 - all rewrite goodness
+RewriteEngine on
+RewriteBase /juice-stand/
+RewriteRule ^profile/([0-9]*)    profile.php?user_id=$1
+RewriteRule ^(.*)/css/(.*)$      css/$2
+RewriteRule ^css/(.*png)$        $1
+RewriteRule ^(.*)/js/(.*js)$     js/$2
