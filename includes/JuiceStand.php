@@ -42,7 +42,7 @@ class JuiceStand
 		</section>
 
 		<section>
-			<?php $u_game_time = ( $GLOBALS['offline'] ) ? 0 : strtotime( $row['game_date'] . ' ' . $row['game_time'] ); ?>
+			<?php $u_game_time = ( juice_stand()->offline_mode ) ? 0 : strtotime( $row['game_date'] . ' ' . $row['game_time'] ); ?>
 			<div id="date" data-date="<?php echo $u_game_time; ?>">
 				<i class="fa fa-calendar"></i>
 				<h2><?php echo date( 'M dS', $u_game_time ); ?></h2>
@@ -88,7 +88,7 @@ class JuiceStand
 	{
 		if ( ! isset( $this->db ) )
 		{
-			@$this->db = new mysqli( 'localhost', 'juice', 'drinkup', 'juice_stand' );
+			@$this->db = new mysqli( 'localhost', 'kebussard', 'wullfora', 'kebussard' );
 			if ( $this->db->connect_errno > 0 )
 			{
 				if ( ! $this->offline_support )
@@ -163,7 +163,7 @@ class JuiceStand
 		return TRUE;
 	}//end save_game
 
-	public function sign_up( $email, $password, $password_confirm )
+	public function sign_up( $email, $password, $password_confirm, $name, $twitter, $url )
 	{
 		if ( TRUE == $this->offline_mode )
 		{
@@ -185,8 +185,8 @@ class JuiceStand
 		$stmt = $this->db()->prepare( $sql );
 		$stmt->bind_param( 's', $email );
 		$stmt->execute();
-		$res = $stmt->get_result();
-		if ( $row = $res->fetch_assoc() )
+		$stmt->bind_result($ok);
+		if ( $stmt->fetch() )
 		{
 			return 'Duplicate account detected.';
 		}//end if
@@ -194,12 +194,12 @@ class JuiceStand
 		// not a duplicate...
 		$sql = 'INSERT INTO user ( email, password, name, url, twitter ) VALUES ( ?, ?, ?, ?, ? )';
 		$stmt = $this->db()->prepare( $sql );
-		$stmt->bind_param( 'ss',
-			$_POST['email'],
+		$stmt->bind_param( 'sssss',
+			$email,
 			password_hash( $password, PASSWORD_DEFAULT ),
-			$_POST['name'],
-			$_POST['twitter'],
-			$_POST['url']
+			$name,
+			$twitter,
+			$url
 		);
 		$stmt->execute();
 
@@ -218,22 +218,22 @@ class JuiceStand
 			return 'Both fields are required.';
 		}//end if
 
-		$sql = 'SELECT * FROM user WHERE email = ?';
+		$sql = 'SELECT id, password FROM user WHERE email = ?';
 		$stmt = $this->db()->prepare( $sql );
 		$stmt->bind_param( 's', $email );
 		$stmt->execute();
-		$res = $stmt->get_result();
-		if ( ! $row = $res->fetch_assoc() )
+		$stmt->bind_result( $id, $password_hash );
+		if ( ! $stmt->fetch() )
 		{
 			return 'Email not found.';
 		}//end if
 
-		if ( ! password_verify( $password, $row['password'] ) )
+		if ( ! password_verify( $password, $password_hash ) )
 		{
 			return 'Bad password';
 		}// end if
 
-		$_SESSION['user_id'] = $row['id'];
+		$_SESSION['user_id'] = $id;
 
 		return TRUE;
 	}//end authenticate
@@ -267,7 +267,7 @@ class JuiceStand
 
 		$stmt->bind_param( 'i', $user_id );
 		$stmt->execute();
-		$res = $stmt->get_result();
+		$res = $stmt->bind_result();
 		if ( ! $row = $res->fetch_assoc() )
 		{
 			return FALSE;

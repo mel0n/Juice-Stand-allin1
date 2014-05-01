@@ -97,7 +97,11 @@ $( function() {
 
 		localStorage.setItem( game.storage_save_key, JSON.stringify( game.$save_form.serializeObject() ) );
 
-		game.$save_form.submit();
+		//game.$save_form.submit( function () { 
+        //e.preventDefault();
+        $.blockUI();
+        $.post("save.php", $('#save_form').serialize(), function(data) {$.unblockUI(); $.colorbox.close()});
+      //});
 	};
 
 	game.offline_data = function() {

@@ -1,0 +1,41 @@
+Before (benchmark):
+
+14 requests, 272 KB Transferred, 194 ms(load: 213 ms, DOM: 141 ms)
+14 requests, 272 KB Transferred, 3.07 s(load: 3.09 s, DOM: 3.05 s) --excluded from average as outlier
+14 requests, 272 KB Transferred, 181 ms(load: 156 ms, DOM: 114 ms)
+14 requests, 272 KB Transferred, 160 ms(load: 176 ms, DOM: 112 ms)
+14 requests, 272 KB Transferred, 236 ms(load: 251 ms, DOM: 205 ms)
+14 requests, 272 KB Transferred, 269 ms(load: 279 ms, DOM: 116 ms)
+14 requests, 272 KB Transferred, 161 ms(load: 163 ms, DOM: 123 ms)
+14 requests, 272 KB Transferred, 156 ms(load: 156 ms, DOM: 120 ms)
+14 requests, 272 KB Transferred, 157 ms(load: 160 ms, DOM: 122 ms)
+14 requests, 272 KB Transferred, 156 ms(load: 162 ms, DOM: 122 ms)
+
+Average
+
+14 requests, 272 KB Transferred, 186 ms(load: 191 ms, DOM: 131 ms)
+
+
+After Optimization:
+
+13 requests, 256 KB transferred, 249 ms(load 250 ms, DOM 197 ms)
+13 requests, 256 KB transferred, 184 ms(load 188 ms, DOM 132 ms)
+13 requests, 256 KB transferred, 182 ms(load 167 ms, DOM 129 ms)
+13 requests, 256 KB transferred, 227 ms(load 224 ms, DOM 169 ms)
+13 requests, 256 KB transferred, 322 ms(load 171 ms, DOM 126 ms)
+13 requests, 256 KB transferred, 333 ms(load 165 ms, DOM 125 ms)
+13 requests, 256 KB transferred, 329 ms(load 170 ms, DOM 126 ms)
+13 requests, 256 KB transferred, 184 ms(load 166 ms, DOM 129 ms)
+13 requests, 256 KB transferred, 184 ms(load 169 ms, DOM 129 ms)
+13 requests, 256 KB transferred, 186 ms(load 184 ms, DOM 129 ms)
+
+Average
+
+13 requests, 256 KB transferred, 238 ms(load 186 ms, DOM 139 ms)
+
+
+
+I initially had it down to 12 requests but I had to add an extra file for the blocking in Jquery. The end impact however was
+1 less request, and 16 less KB to transfer. I would save about 5,000,000 requests per month and 80,000,000 KB to be transferred.
+So on a large scale website that is a LOT of savings and was deffinitially worth the effort. With our application it doesnt really matter how fast
+it loads so it would be a waste of time unless just for practice/application of these techniques on a smaller scale.

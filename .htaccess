@@ -1,6 +1,19 @@
-RewriteEngine on
-RewriteBase /juice-stand/
-RewriteRule ^profile/([0-9]*)    profile.php?user_id=$1
-RewriteRule ^(.*)/css/(.*)$      css/$2
-RewriteRule ^css/(.*png)$        $1
+RewriteEngine On
+#Profile Rules
+RewriteBase     /~kebussard/hw6/
+RewriteRule    ^profile/([0-9]+)/?$         profile.php?user_id=$1
+RewriteRule    ^profile/?$                  profile.php
+
+#CSS Rule
+RewriteRule    ^profile/css/([A-z0-9_.]+)?$ css/$1
+
+#Colorbox Rule
+RewriteRule    ^css/images/(\w+){1}\.png$      images/$1.png
+RewriteRule    ^css/images/(\w+){1}\.gif$      images/$1.gif
+
+#compression
+SetOutputFilter DEFLATE 
+
+
+
 RewriteRule ^(.*)/js/(.*js)$     js/$2

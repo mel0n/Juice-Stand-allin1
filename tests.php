@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/includes/routing.php';
 
-if ( 1 != juice_stand()->logged_in_user() )
+if ( 2 != juice_stand()->logged_in_user() )
 {
 	exit( 'invalid test user' );
 }//end if
