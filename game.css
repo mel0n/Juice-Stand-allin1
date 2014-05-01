@@ -10,6 +10,16 @@ header {
 	text-align: center;
 	color: #bbb;
 	padding: 10px 0 10px 0;
+	position: relative;
+}
+
+#pause {
+	position: absolute;
+	right: 15px;
+	top: 25px;
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
 }
 
 footer {
@@ -24,7 +34,7 @@ h1, h2 {
 	padding: 0;
 }
 
-#wrapper {
+#wrapper, button {
 	background: rgba(210,255,82,1);
 	background: -moz-linear-gradient(top, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%);
 	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(210,255,82,1)), color-stop(100%, rgba(145,232,66,1)));
@@ -54,6 +64,7 @@ section > div {
 	position: relative;
 	margin-top: 10px;
 	height: 100px;
+	opacity: 0.8;
 
 	border-radius: 0px 0px 10px 0px;
 	-moz-border-radius: 0px 0px 10px 0px;
@@ -130,4 +141,30 @@ section > div > p {
 	display: inline-block;
 	margin: 0;
 	padding: 0;
+}
+
+button {
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	display: inline-block;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: 700;
+	letter-spacing: 1px;
+	margin: 15px 44px;
+	outline: none;
+	padding: 25px 0;
+	text-align: center;
+	position: relative;
+	text-transform: uppercase;
+	width: 200px;
+	transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+}
+
+.screen {
+	width: 280px;
+	text-align:center
 }
