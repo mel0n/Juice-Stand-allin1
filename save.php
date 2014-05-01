@@ -1,5 +1,4 @@
 <?php
-
 require 'juice-stand.php';
 $result = juice_save_game( $_POST );
 

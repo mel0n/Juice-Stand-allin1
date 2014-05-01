@@ -77,11 +77,6 @@ function juice_save_game( $state )
 	$state['date'] = date( 'Y-m-d', strtotime( $state['date'] ) );
 	$state['time'] = date( 'H:i:s', strtotime( $state['time'] ) );
 
-	$state['balance'] = str_replace( '$', '', $state['balance'] );
-	$state['price'] = str_replace( '$', '', $state['price'] );
-
-	$state['juice'] = str_replace( ' mL', '', $state['juice'] );
-
 	$stmt = $db->prepare(
 		'UPDATE game SET
 			stand_name = ?,
@@ -93,8 +88,6 @@ function juice_save_game( $state )
 			juice = ?,
 			customers = ?
 		WHERE id = 1' );
-
-	$state['price'] = 0.75;
 
 	$stmt->bind_param( 'sddssidi',
 		$state['name'],

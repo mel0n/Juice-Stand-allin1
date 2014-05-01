@@ -35,12 +35,12 @@ $u_game_time = strtotime( $row['game_time'] );
 						<i class="fa fa-money"></i>
 						<h2>Bank Account</h2>
 						<img src="">
-						<p>$<?php echo number_format( $row['balance'], 2 ); ?></p>
+						<p>$<span id="account-value"><?php echo number_format( $row['balance'], 2 ); ?></span></p>
 					</div>
 					<div id="price">
 						<i class="fa fa-credit-card"></i>
 						<h2>Price</h2>
-						<p>$<?php echo number_format( $row['price'], 2 ); ?></p>
+						<p>$<span id="price-value"><?php echo number_format( $row['price'], 2 ); ?></span></p>
 					</div>
 					<div id="updates">
 						<i class="fa fa-bullhorn"></i>
@@ -62,11 +62,23 @@ $u_game_time = strtotime( $row['game_time'] );
 						<i class="fa fa-lemon-o"></i>
 						<h2>Fruit</h2>
 						<p><?php echo $row['fruit']; ?></p>
+						<div>
+							<button data-amount="1">Buy 1 @ $0.30</button>
+							<button data-amount="4">Buy 4 @ $1.00</button>
+							<button data-amount="30">Buy 30 @ $6.00</button>
+							<button data-amount="140">Buy 140 @ $21.00</button>
+						</div>
 					</div>
 					<div id="product">
 						<i class="fa fa-tint"></i>
 						<h2>Juice</h2>
-						<p><?php echo number_format( $row['juice'], 3 ); ?>  mL</p>
+						<p><span id="product-value"><?php echo number_format( $row['juice'], 3 ); ?></span> mL</p>
+						<div>
+							<strong>Make:</strong>
+							<button data-amount="1">1</button>
+							<button data-amount="10">10</button>
+							<button data-amount="all">All</button>
+						</div>
 					</div>
 					<div id="customers">
 						<i class="fa fa-users"></i>
