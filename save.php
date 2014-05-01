@@ -1,8 +1,8 @@
 <?php
-require 'juice-stand.php';
+require 'includes/juice-stand.php';
 $result = juice_save_game( $_POST );
 
-if ( TRUE !== $result )
+if ( TRUE !== $result && ! $GLOBALS['offline'] )
 {
 	echo $result;
 	exit;

@@ -13,4 +13,5 @@
 	<input type="text" name="juice" id="form_juice" />
 	<input type="text" name="fruit" id="form_fruit" />
 	<input type="text" name="time" id="form_time" />
+	<input type="text" name="u_date" id="form_u_date" />
 </form>
