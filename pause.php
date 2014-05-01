@@ -1,6 +1,7 @@
 <div class="screen">
 	<button id="save">Save</button><br/>
-	<button id="reset">Reset</button>
+	<button id="reset">Reset</button><br/>
+	<button id="logout">Logout</button>
 </div>
 
 <form method="post" action="save.php" id="save_form" style="display:none;">

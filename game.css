@@ -168,3 +168,39 @@ button {
 	width: 280px;
 	text-align:center
 }
+
+/* the following styles are for the sign in/up page */
+label {
+	display: block;
+	padding: 5px 0 0 32px;
+}
+
+input {
+	height: 2.15em;
+	background-color: white;
+	box-shadow: none;
+	display: block;
+	font-size: 1em;
+	margin: auto;
+	padding: 0.5em;
+}
+
+fieldset {
+	background-color: white;
+}
+
+fieldset a {
+	color: #bbb;
+	display: block;
+	padding-left: 32px;
+	text-decoration: none;
+}
+
+fieldset a:hover {
+	color: #aaa;
+	text-decoration: underline;
+}
+
+#sign-up-form {
+	display: none;
+}

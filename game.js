@@ -18,6 +18,7 @@ $( function() {
 		$(document).on( "click", "#pause", game.pause );
 		$(document).on( "click", "#save", game.save );
 		$(document).on( "click", "#reset", game.reset );
+		$(document).on( "click", "#logout", game.logout );
 	};
 
 	game.check_keys = function( e ) {
@@ -42,6 +43,10 @@ $( function() {
 	game.reset = function() {
 		game.clock_reset();
 		game.clock_update();
+	};
+
+	game.logout = function() {
+		window.location += '?logout';
 	};
 
 	game.pause = function() {
